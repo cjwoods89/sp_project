@@ -6,6 +6,9 @@
   var postButton = $('#post');
   var putButton = $('#put');
   var deleteButton = $('.glyphicon-remove');
+  var addButton = $('.glyphicon-add');
+  var addTable = $('.addTable');
+  var resetTable = $('.resetTable');
 
   // Areas of the DOM
   var introContent = $('#introContent');
@@ -14,6 +17,7 @@
   var putContent = $('#putContent');
   var deleteContent = $('#deleteContent');
   var getTable = $('#getTable');
+  var postTable = $('#postTable');
 
   var getPagination = $('#getPagination')
 
@@ -46,14 +50,7 @@
     getPagination.empty();
   }
 
-  introButton.click(function(){
-
-    resetAttr($(this));
-    resetHide(introContent);
-
-  });
-
-  getButton.click(function(){
+  function getData(){
 
     resetContent($(this));
 
@@ -67,7 +64,8 @@
           var goodDate = data[i].orig_air_date;
 
           getTable.append(
-            '<tr> <td> <span class="glyphicon glyphicon-remove delete" aria-hidden="true"></span> </td>' +
+            '<tr> <td> <span class="glyphicon glyphicon-remove delete" aria-hidden="true" dataID="' + data[i].id +
+            '"></span> </td>' +
             '<td class="season">' + data[i].season + '</td>' +
             '<td class="episode">' + data[i].ep_num + '</td>' +
             '<td class="title">' + data[i].title + '</td>' +
@@ -75,7 +73,7 @@
             '<td class="date">' + goodDate.substring(0, goodDate.indexOf('T')) + '</td> </tr>'
           );
 
-          console.log(data[i].season);
+          // console.log(data[i].season);
 
           if (data[i].season != seasonNum){
             seasonNum = seasonNum + 1;
@@ -95,7 +93,21 @@
 
     }); // Closes initial get
 
-  }); // Closes getButton.click
+  }; // Closes getButton.click
+
+  introButton.click(function(){
+
+    resetAttr($(this));
+    resetHide(introContent);
+
+  });
+
+  getButton.click(function(){
+    resetAttr($(this));
+    resetHide(getContent);
+
+    getData();
+  });
 
   getPagination.on("click",".seasonButton",function(){
 
@@ -132,6 +144,53 @@
 
   });
 
+  addTable.click(function(){
+
+    postTable.append(
+      '<tr>' +
+        '<td><span class="glyphicon glyphicon-plus plus" aria-hidden="true"></span></td>' +
+        '<td><input type="number" class="form-control postSeason"></td>' +
+        '<td><input type="number" class="form-control postEpisode"></td>' +
+        '<td><input type="text" class="form-control postTitle" placeholder="Title"></td>' +
+        '<td><textarea type="text" class="form-control postDescription" placeholder="Description" rows="1"></textarea></td> ' +
+        '<td><input type="date" class="form-control postAir_date" placeholder="Air Date"></td>' +
+      '</tr>'
+    )
+
+  });
+
+  resetTable.click(function(){
+    $("#postTable td").remove();
+  });
+
+  postTable.on("click", ".plus", function(){
+
+    var seasonData = $(this).closest('tr').find(".postSeason").val();    // Find the input
+    var episodeData = $(this).closest('tr').find(".postEpisode").val();    // Find the input
+    var titleData = $(this).closest('tr').find(".postTitle").val();    // Find the input
+    var descriptionData = $(this).closest('tr').find(".postDescription").val();    // Find the input
+    var air_dateData = $(this).closest('tr').find(".postAir_date").val();    // Find the input
+    // var seasonData = row.val(); // Find the text
+
+    // var $row = $(this).closest("tr");    // Find the row
+    // var $text = $row.find(".nr").text(); // Find the text
+
+    $.ajax({
+      url: 'http://localhost:1337/episode?season=' + seasonData +
+      '&ep_num=' + episodeData +
+      '&title=' + titleData +
+      '&description=' + descriptionData +
+      '&orig_air_date=' + air_dateData
+      ,
+      type: 'POST', // specify request method as POST
+      success:  $(this).closest('tr').css("background-color","lightgreen"),
+      fail: $(this).closest('tr').css("background-color","lightred")
+    });
+
+
+  });
+
+
   putButton.click(function(){
 
     resetAttr($(this));
@@ -142,16 +201,13 @@
   // What to do when the delete button is pressed
   getTable.on("click", ".delete", function(){
 
-    var row = $(this).closest("tr");   // Finds the closest row <tr>
+    var record_ID = $(this).attr('dataID');
 
-    var text = row.find(".description").text();
-
-    // $.ajax({
-    //   url: 'http://localhost:1337/episode?description=' + text,
-    //   type: 'DELETE', // specify request method as POST
-    // });
-
-       console.log(text);       // Outputs the answer
+    $.ajax({
+      url: 'http://localhost:1337/episode?id=' + record_ID,
+      type: 'DELETE', // specify request method as POST
+      success:  getData()
+    });
 
   });
 

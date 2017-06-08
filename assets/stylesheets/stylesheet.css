@@ -101,8 +101,17 @@ th {
   display: none;
 }
 
+#postTable .small{
+  width: 85px;
+}
+
 .delete:hover {
   color: red;
   cursor: context-menu;
   font-size: 15px;
+}
+
+.button_container {
+  position: relative;
+  top: -15px;
 }

@@ -173,7 +173,33 @@
         </div>
 
         <div class="page-header" id="postContent">
-          <h2>Bacon Ipsum!
+
+          <div class="button_container">
+            <button type="button" class="btn btn-default addTable">Add Table</button>
+            <button type="button" class="btn btn-default resetTable">Reset Table</button>
+          </div>
+
+          <table class="table table-hover" id="postTable">
+            <tr>
+                <th class="small">Add</th>
+                <th class="small">Season *</th>
+                <th class="small">Episode *</th>
+                <th>Title *</th>
+                <th>Description *</th>
+                <th>Air Date</th>
+            </tr>
+            <tr>
+              <td><span class="glyphicon glyphicon-plus plus" aria-hidden="true"></span></td>
+              <td><input type="number" class="form-control postSeason"></td>
+              <td><input type="number" class="form-control postEpisode"></td>
+              <td><input type="text" class="form-control postTitle" placeholder="Title"></td>
+              <td><textarea type="text" class="form-control postDescription" placeholder="Description" rows="1"></textarea></td>
+              <td><input type="date" class="form-control postAir_date" placeholder="Air Date"></td>
+            </tr>
+
+          </table>
+
+          <!-- <h2>Bacon Ipsum!
             <small><p>Bacon ipsum dolor sit amet salami ham hock ham, hamburger corned
               beef short ribs kielbasa biltong t-bone drumstick tri-tip tail sirloin
               pork chop. Kielbasa turducken turkey cow shoulder pig prosciutto
@@ -182,7 +208,7 @@
                ribs cow tri-tip ribeye beef ribs boudin. Short ribs pork belly leberkas
                salami chuck, pork loin ball tip tenderloin turkey chicken pork chop
                filet mignon biltong.</p></small>
-           </h2>
+           </h2> -->
         </div>
 
         <div class="page-header" id="putContent">
