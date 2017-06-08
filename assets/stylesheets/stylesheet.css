@@ -1,0 +1,108 @@
+body {
+  /*background-color: red !important;*/
+  padding-top: 50px;
+  /*padding-bottom: 50px;*/
+}
+
+th {
+  white-space: nowrap;
+}
+
+.nav-tabs {
+
+  left: auto;
+  right: auto;
+
+}
+
+.container {
+
+  display: flex;
+  left: auto;
+  right: auto;
+  flex-direction: row;
+  /*border: 1px solid blue;*/
+
+}
+
+.disclaimer {
+
+  padding-bottom: 20px;
+
+}
+
+.left {
+
+  flex: 2.25;
+
+}
+
+.apiContent {
+
+  /*border: 1px solid green;*/
+  position: relative;
+  top: -5px;
+  padding: 0 2% 0 0;
+
+}
+
+.right {
+
+  flex: .75;
+
+}
+
+.apiNavigation {
+
+  /*border: 1px solid red;*/
+  padding: 0 0 0 2%;
+  border-left: 1px solid gray;
+
+}
+
+.footer {
+
+  background-color: black;
+  margin-top: 20px;
+  padding-top: 30px;
+
+}
+
+#main_body {
+  position: relative;
+  padding-top: 0;
+  margin-top: -10px;
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+
+.pagination {
+  position: relative;
+  top: -30px;
+}
+
+#introContent {
+  display: block;
+}
+
+#getContent {
+  display: none;
+}
+
+#postContent {
+  display: none;
+}
+
+#putContent {
+  display: none;
+}
+
+#deleteContent {
+  display: none;
+}
+
+.delete:hover {
+  color: red;
+  cursor: context-menu;
+  font-size: 15px;
+}
