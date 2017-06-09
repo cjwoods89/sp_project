@@ -9,6 +9,7 @@
   var addButton = $('.glyphicon-add');
   var addTable = $('.addTable');
   var resetTable = $('.resetTable');
+  var allSeasons = $('#allSeasons');
 
   // Areas of the DOM
   var introContent = $('#introContent');
@@ -18,6 +19,7 @@
   var deleteContent = $('#deleteContent');
   var getTable = $('#getTable');
   var postTable = $('#postTable');
+  var alert = $('.alert_container');
 
   var getPagination = $('#getPagination')
 
@@ -29,7 +31,6 @@
     introButton.attr("class", "");
     putButton.attr("class", "");
     postButton.attr("class", "");
-    // deleteButton.attr("class", "");
     getButton.attr("class", "");
     button.attr("class", "active");
   };
@@ -44,10 +45,12 @@
   };
 
   function resetContent(content){
-    resetAttr($(content));
+    // resetAttr(content);
     resetHide(getContent);
     $("#getTable td").remove();
     getPagination.empty();
+    getPagination.append('<li><a href="#/" id="allSeasons">All Seasons</a></li>');
+
   }
 
   function getData(){
@@ -64,7 +67,7 @@
           var goodDate = data[i].orig_air_date;
 
           getTable.append(
-            '<tr> <td> <span class="glyphicon glyphicon-remove delete" aria-hidden="true" dataID="' + data[i].id +
+            '<tr> <td> <span class="glyphicon glyphicon-remove delete" aria-hidden="true" data-episodeID="' + data[i].id +
             '"></span> </td>' +
             '<td class="season">' + data[i].season + '</td>' +
             '<td class="episode">' + data[i].ep_num + '</td>' +
@@ -76,12 +79,11 @@
           // console.log(data[i].season);
 
           if (data[i].season != seasonNum){
-            seasonNum = seasonNum + 1;
+            seasonNum = data[i].season;
 
-            if (data[i].season == seasonNum) {
-            getPagination.append(
-              '<li><a href="#/" class="seasonButton">Season ' + data[i].season + '</a></li>'
-            )};
+            // if (data[i].season == seasonNum) {
+            getPagination.append('<li><a href="#/" class="seasonButton">Season ' + data[i].season + '</a></li>'
+            );
           };
 
           // console.log(data[i].title);
@@ -93,7 +95,7 @@
 
     }); // Closes initial get
 
-  }; // Closes getButton.click
+  }; // Closes get function
 
   introButton.click(function(){
 
@@ -103,11 +105,16 @@
   });
 
   getButton.click(function(){
+    // debugger;
     resetAttr($(this));
     resetHide(getContent);
 
     getData();
   });
+
+  getPagination.on("click","#allSeasons",function(){
+    getData();
+  })
 
   getPagination.on("click",".seasonButton",function(){
 
@@ -125,7 +132,8 @@
           var goodDate = data[i].orig_air_date;
 
           getTable.append(
-            '<tr> <td> <span class="glyphicon glyphicon-remove delete" aria-hidden="true"></span> </td>' +
+            '<tr> <td> <span class="glyphicon glyphicon-remove delete" aria-hidden="true" data-episodeID="' + data[i].id +
+            '"></span> </td>' +
             '<td class="season">' + data[i].season + '</td>' +
             '<td class="episode">' + data[i].ep_num + '</td>' +
             '<td class="title">' + data[i].title + '</td>' +
@@ -170,10 +178,6 @@
     var titleData = $(this).closest('tr').find(".postTitle").val();    // Find the input
     var descriptionData = $(this).closest('tr').find(".postDescription").val();    // Find the input
     var air_dateData = $(this).closest('tr').find(".postAir_date").val();    // Find the input
-    // var seasonData = row.val(); // Find the text
-
-    // var $row = $(this).closest("tr");    // Find the row
-    // var $text = $row.find(".nr").text(); // Find the text
 
     $.ajax({
       url: 'http://localhost:1337/episode?season=' + seasonData +
@@ -182,9 +186,20 @@
       '&description=' + descriptionData +
       '&orig_air_date=' + air_dateData
       ,
-      type: 'POST', // specify request method as POST
-      success:  $(this).closest('tr').css("background-color","lightgreen"),
-      fail: $(this).closest('tr').css("background-color","lightred")
+      type: 'POST',
+      success:  function(xhr){
+        alert.append('<div class="alert alert-success alert-dismissible" role="alert">' +
+        '<button type="button" class="close" data-dismiss="alert" aria-label="Close"> ' +
+        '<span aria-hidden="true">&times;</span></button>' +
+        '<strong>Success!</strong> You have added your item to the API.</div>')
+
+      },
+      error: function(errorThrown ){
+          alert.append('<div class="alert alert-danger alert-dismissible" role="alert"> ' +
+          '<button type="button" class="close" data-dismiss="alert" aria-label="Close"> ' +
+          '<span aria-hidden="true">&times;</span></button>' +
+          '<strong>Warning!</strong> Error message: ' + errorThrown + '! Please check to see if you completed all required fields.</div>')
+      }
     });
 
 
@@ -201,12 +216,18 @@
   // What to do when the delete button is pressed
   getTable.on("click", ".delete", function(){
 
-    var record_ID = $(this).attr('dataID');
+    var record_ID = $(this).attr('data-episodeID');
 
     $.ajax({
       url: 'http://localhost:1337/episode?id=' + record_ID,
-      type: 'DELETE', // specify request method as POST
-      success:  getData()
+      type: 'DELETE',
+      success:  function(xhr) {
+        getData();
+      },
+      error: function( jqXhr, textStatus, errorThrown ){
+          console.log( errorThrown );
+      }
+
     });
 
   });
