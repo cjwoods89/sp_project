@@ -1,3 +1,11 @@
+@media screen and (min-width: 0px) and (max-width: 768px) {
+  #right { display: none; }  /* show it on small screens */
+}
+
+@media screen and (min-width: 769) {
+  #right { display: block; }   /* hide it elsewhere */
+}
+
 body {
   /*background-color: red !important;*/
   padding-top: 50px;
@@ -33,7 +41,7 @@ th {
 
 .left {
 
-  flex: 2.25;
+  flex: 2.50;
 
 }
 
@@ -48,7 +56,7 @@ th {
 
 .right {
 
-  flex: .75;
+  flex: .50;
 
 }
 
@@ -112,6 +120,12 @@ th {
   font-size: 15px;
 }
 
+.put:hover {
+  color: green;
+  cursor: context-menu;
+  font-size: 15px;
+}
+
 .button_container {
   position: relative;
   top: -15px;
@@ -125,4 +139,9 @@ th {
 
 #getContent .btn {
   position: absolute;
+}
+
+#facts {
+  padding: 10px;
+  text-align: right;
 }

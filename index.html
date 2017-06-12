@@ -24,13 +24,13 @@
          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
            <ul class="nav navbar-nav">
              <li class="active"><a href="#">Home <span class="sr-only">(current)</span></a></li>
-             <li><a href="#">Link 1</a></li>
-             <li><a href="#">Link 2</a></li>
-             <li><a href="#">Link 3</a></li>
+             <li><a href="http://southpark.cc.com/" target="_blank">Watch South Park Online</a></li>
+             <li><a href="http://southpark.cc.com/wiki" target="_blank">More information</a></li>
+             <li><a href="https://www.google.com/search?q=south+park+images&safe=active&tbm=isch&tbo=u&source=univ&sa=X&ved=0ahUKEwjOxKCgiLnUAhXH1IMKHTWlA20QsAQIIw&biw=1313&bih=776" target="_blank">South Park Images</a></li>
 
            </ul>
 
-           <ul class="nav navbar-nav navbar-right">
+           <!-- <ul class="nav navbar-nav navbar-right">
              <li class="dropdown">
                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
                <ul class="dropdown-menu">
@@ -41,7 +41,7 @@
                  <li><a href="#">Separated link</a></li>
                </ul>
              </li>
-           </ul>
+           </ul> -->
          </div><!-- /.navbar-collapse -->    </div>
   </nav>
 
@@ -58,21 +58,21 @@
         <!-- Wrapper for slides -->
         <div class="carousel-inner" role="listbox">
           <div class="item active">
-            <img src="http://via.placeholder.com/1200x500" alt="..." id="img1">
+            <img src="assets/images/southPark1.jpg" id="img1">
             <div class="carousel-caption">
               South Park Image 1
             </div>
           </div>
 
           <div class="item">
-            <img src="http://via.placeholder.com/1200x500" alt="..." id="img2">
+            <img src="assets/images/southPark2.jpg" id="img2">
             <div class="carousel-caption">
               South Park Image 2
             </div>
           </div>
 
           <div class="item">
-            <img src="http://via.placeholder.com/1200x500" alt="..." id="img3">
+            <img src="assets/images/southPark3.jpg" id="img3">
             <div class="carousel-caption">
               South Park Image 3
             </div>
@@ -107,7 +107,7 @@
     <li role="presentation" class="active" id="intro"><a href="#/">INTRODUCTION</a></li>
     <li role="presentation" id="get"><a href="#/">GET <span class="glyphicon glyphicon-save" aria-hidden="true"></span></a></li>
     <li role="presentation" id="post"><a href="#/">POST <span class="glyphicon glyphicon-open" aria-hidden="true"></span></a></li>
-    <li role="presentation" id="put"><a href="#/">PUT <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span></a></li>
+    <!-- <li role="presentation" id="put"><a href="#/">PUT <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span></a></li> -->
     <!-- <li role="presentation" id="delete"><a href="#/">DELETE <span class="glyphicon glyphicon-floppy-remove" aria-hidden="true"></span></a></li> -->
 
   </ul>
@@ -135,7 +135,8 @@
                 politicians of every stripe and self-important celebrities. Oh,
                 and Kenny is killed in many episodes.<br /><br /> While the topic
                 may seem controversial, building this API and front end was a fun
-                project, and I'm glad to share it with you!
+                project, and I'm glad to share it with you! <br/>
+                <br/>Also, please be sure to check out the random South Park facts located on the right!
               </p>
             </small>
           </h2>
@@ -147,7 +148,7 @@
 
           <table class="table table-hover" id="getTable">
             <tr>
-                <th>Delete</th>
+                <th>Admin</th>
                 <th>Season</th>
                 <th>Episode</th>
                 <th>Title</th>
@@ -220,7 +221,7 @@
            </h2>
         </div>
 
-        <div class="page-header" id="deleteContent">
+        <!-- <div class="page-header" id="deleteContent">
           <h2>Chuck Norris Ipsum!
             <small><p>Chuck ipsum. Multiple people have died from Chuck Norris giving them
               the finger. Chuck Norris doesn’t need to swallow when eating food.
@@ -228,7 +229,7 @@
               corn needs to lie the f*ck down. Chuck Norris ordered a Big Mac at
               Burger King, and got one.</p></small>
           </h2>
-        </div>
+        </div> -->
 
       </div>
 
@@ -236,9 +237,9 @@
 
   </div>
 
-  <div class="right apiNavigation">
+  <div class="right apiNavigation" id="right">
 
-    <div class="well well-lg">
+    <div class="well well-lg" id="facts">
 
     </div>
 
